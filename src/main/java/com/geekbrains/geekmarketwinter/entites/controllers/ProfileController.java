@@ -1,4 +1,4 @@
-package com.geekbrains.geekmarketwinter.controllers;
+package com.geekbrains.geekmarketwinter.entites.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

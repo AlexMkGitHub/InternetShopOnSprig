@@ -61,13 +61,13 @@
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity5</artifactId>
-            <version>3.0.3.RELEASE</version>
+            <version>3.0.4.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.13</version>
+            <version>8.0.29</version>
         </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
@@ -82,7 +82,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.4</version>
+            <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
 
@@ -158,8 +158,6 @@
             <artifactId>hsqldb</artifactId>
             <scope>runtime</scope>
         </dependency>
-
-
 
 
 

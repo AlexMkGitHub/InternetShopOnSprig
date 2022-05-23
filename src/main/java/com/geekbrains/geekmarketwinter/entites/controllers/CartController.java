@@ -1,4 +1,4 @@
-package com.geekbrains.geekmarketwinter.controllers;
+package com.geekbrains.geekmarketwinter.entites.controllers;
 
 import com.geekbrains.geekmarketwinter.services.ShoppingCartService;
 import com.geekbrains.geekmarketwinter.utils.ShoppingCart;

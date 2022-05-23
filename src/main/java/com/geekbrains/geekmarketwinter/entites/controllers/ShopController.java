@@ -1,4 +1,4 @@
-package com.geekbrains.geekmarketwinter.controllers;
+package com.geekbrains.geekmarketwinter.entites.controllers;
 
 import com.geekbrains.geekmarketwinter.entites.Order;
 import com.geekbrains.geekmarketwinter.entites.Product;
