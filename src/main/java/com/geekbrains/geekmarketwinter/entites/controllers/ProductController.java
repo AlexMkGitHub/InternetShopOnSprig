@@ -1,6 +1,7 @@
 package com.geekbrains.geekmarketwinter.entites.controllers;
 
 import com.geekbrains.geekmarketwinter.entites.Product;
+import com.geekbrains.geekmarketwinter.entites.ProductDTO;
 import com.geekbrains.geekmarketwinter.entites.ProductImage;
 import com.geekbrains.geekmarketwinter.services.CategoryService;
 import com.geekbrains.geekmarketwinter.services.ProductService;
@@ -15,8 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
-@Controller
 @RequestMapping("/products")
+@Controller
 public class ProductController {
     private ProductService productService;
     private CategoryService categoryService;
@@ -35,5 +36,23 @@ public class ProductController {
     @Autowired
     public void setImageSaverService(ImageSaverService imageSaverService) {
         this.imageSaverService = imageSaverService;
+    }
+
+//    @PostMapping
+//    public String save(@Valid @ModelAttribute("product") Product product, BindingResult binding) {
+//        if (binding.hasErrors() || product.getTitle().isEmpty()) {
+//            binding.rejectValue("title", "", "Enter all data");
+//            return "product_form";
+//        }
+//        productService.saveProduct(product);
+//        return "redirect:/shop-page";
+//    }
+
+    @GetMapping("/add")
+    public String newForm(Model model) {
+        Product addNewProduct = new Product();
+        model.addAttribute("addNewProduct", addNewProduct);
+        model.addAttribute("categories", categoryService.getAllCategories());
+        return "product_form";
     }
 }
