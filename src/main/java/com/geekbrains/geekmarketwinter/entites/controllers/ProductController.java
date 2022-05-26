@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @RequestMapping("/products")
 @Controller
@@ -38,21 +40,30 @@ public class ProductController {
         this.imageSaverService = imageSaverService;
     }
 
-//    @PostMapping
-//    public String save(@Valid @ModelAttribute("product") Product product, BindingResult binding) {
-//        if (binding.hasErrors() || product.getTitle().isEmpty()) {
-//            binding.rejectValue("title", "", "Enter all data");
-//            return "product_form";
-//        }
-//        productService.saveProduct(product);
-//        return "redirect:/shop-page";
-//    }
-
     @GetMapping("/add")
     public String newForm(Model model) {
         Product addNewProduct = new Product();
         model.addAttribute("addNewProduct", addNewProduct);
         model.addAttribute("categories", categoryService.getAllCategories());
-        return "product_form";
+        return "product-add";
+    }
+
+    @PostMapping
+    public String save(@Valid @ModelAttribute("addNewProduct") Product product, BindingResult binding, Model model, @RequestParam ("file") MultipartFile images ) {
+        if (binding.hasErrors() || product.getTitle().isEmpty()) {
+            binding.rejectValue("title", "", "Введите все данные продукта");
+            model.addAttribute("categories", categoryService.getAllCategories());
+            return "product-add";
+        }
+        if (!images.isEmpty()) {
+            ProductImage productImage = new ProductImage();
+            String pathImage = imageSaverService.saveFile(images);
+            product.addImage(productImage);
+            productImage.setPath(pathImage);
+            productImage.setProduct(product);
+        }
+
+        productService.saveProduct(product);
+        return "redirect:/shop";
     }
 }
