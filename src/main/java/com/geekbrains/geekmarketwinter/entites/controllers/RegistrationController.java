@@ -28,6 +28,11 @@ public class RegistrationController {
         this.userService = userService;
     }
 
+    @Autowired
+    public void setRoleService(RoleService roleService) {
+        this.roleService = roleService;
+    }
+
     private final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
 
     @InitBinder
@@ -49,6 +54,7 @@ public class RegistrationController {
         String userName = theSystemUser.getUserName();
         logger.debug("Processing registration form for: " + userName);
         if (theBindingResult.hasErrors()) {
+            theModel.addAttribute("roles", roleService.getAllRoles());
             return "registration-form";
         }
         User existing = userService.findByUserName(userName);
@@ -57,6 +63,7 @@ public class RegistrationController {
             theModel.addAttribute("systemUser", theSystemUser);
             theModel.addAttribute("registrationError", "User with current username already exists");
             logger.debug("User name already exists.");
+            theModel.addAttribute("roles", roleService.getAllRoles());
             return "registration-form";
         }
         userService.save(theSystemUser);

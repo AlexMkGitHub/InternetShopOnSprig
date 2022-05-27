@@ -39,8 +39,8 @@ public class SystemUser {
     @Email
     private String email;
 
-//    @NotNull(message = "is required")
-//    @Size(min = 1, message = "is required")
-//    Collection<Role> roles;
+    @NotNull(message = "is required")
+    @Size(min = 1, message = "is required")
+    Collection<Role> roles;
 
 }
