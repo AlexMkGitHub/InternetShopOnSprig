@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 
 @Data
 @NoArgsConstructor
@@ -37,4 +38,9 @@ public class SystemUser {
     @Size(min = 1, message = "is required")
     @Email
     private String email;
+
+//    @NotNull(message = "is required")
+//    @Size(min = 1, message = "is required")
+//    Collection<Role> roles;
+
 }

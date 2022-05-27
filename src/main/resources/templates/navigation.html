@@ -37,7 +37,8 @@
                     th:classappend="${activeTab == 'Profile' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/profile}">Профиль</a>
                 </li>
-                <li sec:authorize="hasRole('ADMIN')" class="nav-item"
+                <!--                <li sec:authorize="hasRole('ADMIN')" class="nav-item"-->
+                <li class="nav-item"
                     th:classappend="${activeTab == 'AdminDashboard' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/admin}">Админка</a>
                 </li>
@@ -56,6 +57,9 @@
                             <button class="btn btn-secondary btn-sm" type="submit">Войти</button>
                         </div>
                     </form>
+                </li>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="nav-link" th:href="@{/register/showRegistrationForm}">Регистрация</a>
                 </li>
             </ul>
         </div>

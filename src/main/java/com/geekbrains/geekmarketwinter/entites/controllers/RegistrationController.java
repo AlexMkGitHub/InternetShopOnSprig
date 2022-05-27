@@ -2,6 +2,8 @@ package com.geekbrains.geekmarketwinter.entites.controllers;
 
 import com.geekbrains.geekmarketwinter.entites.SystemUser;
 import com.geekbrains.geekmarketwinter.entites.User;
+import com.geekbrains.geekmarketwinter.repositories.RoleRepository;
+import com.geekbrains.geekmarketwinter.services.RoleService;
 import com.geekbrains.geekmarketwinter.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +17,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Controller
 @RequestMapping("/register")
+@Controller
 public class RegistrationController {
     private UserService userService;
+    private RoleService roleService;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -36,6 +39,7 @@ public class RegistrationController {
     @GetMapping("/showRegistrationForm")
     public String showMyLoginPage(Model theModel) {
         theModel.addAttribute("systemUser", new SystemUser());
+        theModel.addAttribute("roles", roleService.getAllRoles());
         return "registration-form";
     }
 

@@ -87,6 +87,16 @@
                         <input th:field="*{email}" placeholder="email (*)" class="form-control"/>
                     </div>
 
+<!--                    <div class="form-group">-->
+<!--                        <label for="roles">Roles</label>-->
+<!--                        <select multiple class="form-control" id="roles" th:field="*{roles}" required>-->
+<!--                            <option th:each="role: ${roles}"-->
+<!--                                    th:text="${role.name}"-->
+<!--                                    th:value="${role.id}"-->
+<!--                                    th:selected="${systemUser.roles?.contains(role)}"></option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+
                     <div style="margin-top: 10px" class="form-group">
                         <div class="col-sm-6 controls">
                             <button type="submit" class="btn btn-primary">Register</button>
