@@ -34,7 +34,7 @@ public class User {
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Collection<Role> roles = new HashSet<>();
+    private Collection<Role> roles = new ArrayList<>();
 
     public static final Map<String, String> COLUMN_MAPPINGS = new HashMap<>();
 
