@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
         user.setLastName(systemUser.getLastName());
         user.setEmail(systemUser.getEmail());
 
-//        user.setRoles(Arrays.asList(roleRepository.findOneByName("ROLE_GUEST")));
+//        user.setRoles(Arrays.asList(roleRepository.findOneByName("ROLE_EMPLOYEE")));
         for (int i = 0; i < systemUser.getRoles().size(); i++) {
             user.setRoles(Arrays.asList(systemUser.getRoles().toArray(new Role[i])));
         }
