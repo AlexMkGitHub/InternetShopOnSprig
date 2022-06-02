@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/script.js"></script>
 </head>
 
 <body>
@@ -65,11 +69,28 @@
                 <li sec:authorize="isAnonymous()" class="nav-item">
                     <a class="nav-link" th:href="@{/register/showRegistrationForm}">Регистрация</a>
                 </li>
+<!--                <div th:align="right" sec:authorize="isAuthenticated()" class="nav-item">-->
+<!--                    <a class="navbar-text">Корзина: </a>-->
+<!--                    <div th:id="message_input_value">-->
+<!--                    </div>-->
+<!--                    <div id="message_template" class="message_template">-->
+<!--                        <div th:if="${cartCoast.getTotalCost()} == null">-->
+<!--                            <div th:text="0.0"></div>-->
+<!--                        </div>-->
+<!--                        <div th:if="${cartCoast.getTotalCost()} > 0">-->
+<!--                            <div th:text="${cartCoast.getTotalCost()}"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <ul class="messages"></ul>-->
+<!--                </div>-->
             </ul>
         </div>
+
     </nav>
     <div class="visible-md" style="height:80px;"></div>
 </div>
+
+
 
 </body>
 </html>

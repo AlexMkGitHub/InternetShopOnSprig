@@ -6,6 +6,8 @@ import com.geekbrains.geekmarketwinter.entites.Product;
 import com.geekbrains.geekmarketwinter.entites.User;
 import com.geekbrains.geekmarketwinter.repositories.specifications.ProductSpecs;
 import com.geekbrains.geekmarketwinter.services.*;
+import com.geekbrains.geekmarketwinter.utils.ShoppingCart;
+import com.geekbrains.geekmarketwinter.websocket.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -67,8 +70,8 @@ public class ShopController {
                            @RequestParam(value = "page") Optional<Integer> page,
                            @RequestParam(value = "word", required = false) String word,
                            @RequestParam(value = "min", required = false) Double min,
-                           @RequestParam(value = "max", required = false) Double max
-    ) {
+                           @RequestParam(value = "max", required = false) Double max,
+                           HttpServletRequest httpServletRequest) {
         final int currentPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
         Specification<Product> spec = Specification.where(null);
@@ -97,7 +100,7 @@ public class ShopController {
         model.addAttribute("min", min);
         model.addAttribute("max", max);
         model.addAttribute("word", word);
-
+        model.addAttribute("cartCoast", shoppingCartService.getCurrentCart(httpServletRequest.getSession()));
 
         return "shop-page";
     }
@@ -108,6 +111,7 @@ public class ShopController {
     public String addProductToCart(Model model, @PathVariable("id") Long id, HttpServletRequest httpServletRequest) {
         shoppingCartService.addToCart(httpServletRequest.getSession(), id);
         String referrer = httpServletRequest.getHeader("referer");
+
 
 //        ConnectionFactory factory = new ConnectionFactory();
 //        factory.setHost("localhost");
@@ -122,6 +126,14 @@ public class ShopController {
 //        }
 
         return "redirect:" + referrer;
+    }
+
+    public String cartPriceShow(HttpServletRequest httpServletRequest) {
+        Double allCoast = shoppingCartService.getTotalCost(httpServletRequest.getSession());
+        String allCoastStr = allCoast.toString();
+        Message message = new Message();
+        message.setMessage(allCoastStr);
+        return "/message";
     }
 
     @GetMapping("/order/fill")
