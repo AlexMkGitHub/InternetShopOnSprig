@@ -21,9 +21,12 @@
 <!--<script type="text/javascript">-->
 <!--    connect()-->
 <!--</script>-->
-<div th:align="right" sec:authorize="isAuthenticated()" class="nav-item">
-    <a class="navbar-text">Корзина: </a>
-    <div th:id="message_input_value" th:text="${cartCoast.getTotalCost()}">
+<div th:align="right" sec:authorize="isAuthenticated()">
+    <div th:if="${cartCoast.getTotalCost() == 0}">
+        <span>Ваша корзина пуста.</span>
+    </div>
+    <div th:unless="${cartCoast.getTotalCost() == 0}">
+        <p>Ваша корзина: <span th:id="message_input_value" th:text="${cartCoast.getTotalCost()}"></span> руб.</p>
     </div>
     <ul class="messages"></ul>
 </div>
