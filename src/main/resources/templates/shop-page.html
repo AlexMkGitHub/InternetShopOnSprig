@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8"/>
 
     <title>Каталог товаров</title>
     <link rel="icon" type="image/png" th:href="@{/static/favicon.ico}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/script.js"></script>
 
 
 </head>
@@ -13,14 +18,26 @@
 <body>
 
 <div th:replace="~{navigation :: navi(Shop)}"/>
-
+<!--<script type="text/javascript">-->
+<!--    connect()-->
+<!--</script>-->
+<div th:align="right" sec:authorize="isAuthenticated()">
+    <div th:if="${cartCoast.getTotalCost() == 0}">
+        <span>Ваша корзина пуста.</span>
+    </div>
+    <div th:unless="${cartCoast.getTotalCost() == 0}">
+        <p>Ваша корзина: <span th:id="message_input_value" th:text="${cartCoast.getTotalCost()}"></span> руб.</p>
+    </div>
+    <ul class="messages"></ul>
+</div>
 <div class="container">
-    <br>
-<!--    <button id="connect" onclick="connect();">Connect</button>-->
-<!--    &lt;!&ndash;<button id="sendName" onclick="sendName();">Send</button>&ndash;&gt;-->
-<!--    <input id="resultInput" type="text" size="40">-->
 
-    <h1 th:text="Фильтры" />
+    <br>
+    <!--    <button id="connect" onclick="connect();">Connect</button>-->
+    <!--    &lt;!&ndash;<button id="sendName" onclick="sendName();">Send</button>&ndash;&gt;-->
+    <!--    <input id="resultInput" type="text" size="40">-->
+
+    <h1 th:text="Фильтры"/>
 
     <form th:action="@{/shop}" method="get">
         <input hidden th:value="${page}" th:name="page">
@@ -32,7 +49,7 @@
 
     <br>
 
-    <h1 th:text="#{products.list}" />
+    <h1 th:text="#{products.list}"/>
 
     <table class="table table-hover">
         <thead class="thead-dark">
@@ -52,12 +69,14 @@
             <td th:text="${iterStat.index}"/>
             <td th:text="${product.id}"/>
             <td>
-                <img th:if="${product.images.size() > 0}" width="40" height="40" th:src="@{'/images/' + ${product.images[0].path}}" />
+                <img th:if="${product.images.size() > 0}" width="40" height="40"
+                     th:src="@{'/images/' + ${product.images[0].path}}"/>
             </td>
             <td th:text="${product.title}"/>
             <td th:text="${product.price}"/>
             <td>
-                <a th:href="@{'/shop/cart/add/' + ${product.id}}" class="btn btn-primary" onclick="sendName()">Добавить в корзину</a>
+                <a th:href="@{'/shop/cart/add/' + ${product.id}}" class="btn btn-primary"
+                   onclick="connect(); sendMessage(); disconnect(); sendName()">Добавить в корзину</a>
             </td>
         </tr>
         </tbody>
@@ -67,23 +86,24 @@
         <ul class="pagination">
             <!--<li class="page-item"><a class="page-link" href="#">Previous</a></li>-->
             <li th:each="i : ${#numbers.sequence(1, totalPage, 1)}">
-                <a th:class="page-link" th:text="${i}" th:classappend="${page == i ? 'active' : ''}" th:href="@{'/shop/?page=' + ${i} + ${filters}}"></a>
+                <a th:class="page-link" th:text="${i}" th:classappend="${page == i ? 'active' : ''}"
+                   th:href="@{'/shop/?page=' + ${i} + ${filters}}"></a>
             </li>
             <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
         </ul>
     </nav>
 
     <!--<table class="table table-hover">-->
-        <!--<thead class="thead-dark">-->
-        <!--<tr>-->
-            <!--<th>ID</th>-->
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody>-->
-        <!--<tr th:each="i : ${#numbers.sequence(1, totalPage, 1)}">-->
-            <!--<th th:text="${i}"></th>-->
-        <!--</tr>-->
-        <!--</tbody>-->
+    <!--<thead class="thead-dark">-->
+    <!--<tr>-->
+    <!--<th>ID</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr th:each="i : ${#numbers.sequence(1, totalPage, 1)}">-->
+    <!--<th th:text="${i}"></th>-->
+    <!--</tr>-->
+    <!--</tbody>-->
     <!--</table>-->
 </div>
 

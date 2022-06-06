@@ -40,7 +40,7 @@ public class ProductController {
         this.imageSaverService = imageSaverService;
     }
 
-    @GetMapping("/add")
+    @GetMapping("/edit/0")
     public String newForm(Model model) {
         Product addNewProduct = new Product();
         model.addAttribute("addNewProduct", addNewProduct);
