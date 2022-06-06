@@ -11,32 +11,14 @@
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script src="/script.js"></script>
-
-
 </head>
 
 <body>
 
 <div th:replace="~{navigation :: navi(Shop)}"/>
-<!--<script type="text/javascript">-->
-<!--    connect()-->
-<!--</script>-->
-<div th:align="right" sec:authorize="isAuthenticated()">
-    <div th:if="${cartCoast.getTotalCost() == 0}">
-        <span>Ваша корзина пуста.</span>
-    </div>
-    <div th:unless="${cartCoast.getTotalCost() == 0}">
-        <p>Ваша корзина: <span th:id="message_input_value" th:text="${cartCoast.getTotalCost()}"></span> руб.</p>
-    </div>
-    <ul class="messages"></ul>
 </div>
 <div class="container">
-
     <br>
-    <!--    <button id="connect" onclick="connect();">Connect</button>-->
-    <!--    &lt;!&ndash;<button id="sendName" onclick="sendName();">Send</button>&ndash;&gt;-->
-    <!--    <input id="resultInput" type="text" size="40">-->
-
     <h1 th:text="Фильтры"/>
 
     <form th:action="@{/shop}" method="get">
@@ -75,8 +57,10 @@
             <td th:text="${product.title}"/>
             <td th:text="${product.price}"/>
             <td>
+                <data id="message_input_value" class="message_input"
+                      th:value="${cartCoast.getTotalCost()}"></data>
                 <a th:href="@{'/shop/cart/add/' + ${product.id}}" class="btn btn-primary"
-                   onclick="connect(); sendMessage(); disconnect(); sendName()">Добавить в корзину</a>
+                   onclick="sendMessage(); sendName(); sendMessage();">Добавить в корзину</a>
             </td>
         </tr>
         </tbody>

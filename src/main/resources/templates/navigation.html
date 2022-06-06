@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <html lang="en">
@@ -22,6 +22,9 @@
 <body>
 
 <div class="fluid-container" th:fragment="navi(activeTab)">
+    <script type="text/javascript">
+        connect();
+    </script>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary ">
         <a class="navbar-brand" th:href="@{/}">GeekWinterMarket</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -71,11 +74,18 @@
                 </li>
             </ul>
         </div>
+        <div th:align="right" sec:authorize="isAuthenticated()">
+            <ul class="messages">
+                <div id="message_template" class="message_template">
+                    <div class="text_wrapper">
+                        <div class="text"></div>
+                    </div>
+                </div>
+            </ul>
+        </div>
 
     </nav>
     <div class="visible-md" style="height:80px;"></div>
 </div>
-
-
 </body>
 </html>
