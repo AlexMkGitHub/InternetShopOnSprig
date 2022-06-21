@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org">
 <html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <html lang="en">
@@ -13,18 +13,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script src="/webjars/jquery/jquery.min.js"></script>
-    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
-    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-    <script src="/script.js"></script>
 </head>
 
 <body>
 
 <div class="fluid-container" th:fragment="navi(activeTab)">
-    <script type="text/javascript">
-        connect();
-    </script>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary ">
         <a class="navbar-brand" th:href="@{/}">GeekWinterMarket</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -57,7 +50,6 @@
                         <input type="submit" class="btn btn-danger" value="Logout"/>
                     </form>
                 </li>
-
                 <li sec:authorize="isAnonymous()" class="nav-item">
                     <form class="align-middle" th:action="@{/authenticateTheUser}" method="POST">
                         <div class="input-group-prepend">
@@ -69,23 +61,11 @@
                         </div>
                     </form>
                 </li>
-                <li sec:authorize="isAnonymous()" class="nav-item">
-                    <a class="nav-link" th:href="@{/register/showRegistrationForm}">Регистрация</a>
-                </li>
             </ul>
         </div>
-        <div th:align="right" sec:authorize="isAuthenticated()">
-            <ul class="messages">
-                <div id="message_template" class="message_template">
-                    <div class="text_wrapper">
-                        <div class="text"></div>
-                    </div>
-                </div>
-            </ul>
-        </div>
-
     </nav>
     <div class="visible-md" style="height:80px;"></div>
 </div>
+
 </body>
 </html>

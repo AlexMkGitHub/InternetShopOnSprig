@@ -1,6 +1,9 @@
 package com.geekbrains.geekmarketwinter.config;
 
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -12,7 +15,6 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import java.util.Locale;
 
 @Configuration
-@EnableAspectJAutoProxy
 @PropertySource("classpath:private.properties")
 @ComponentScan("com.geekbrains.geekmarketwinter")
 public class AppConfig implements WebMvcConfigurer {

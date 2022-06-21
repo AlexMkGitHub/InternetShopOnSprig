@@ -31,19 +31,19 @@ public class UserServiceTest {
     @MockBean
     private MailService mailService;
 
-//    @Test
-//    public void userServiceTest() {
-//        SystemUser systemUser = new SystemUser();
-//        systemUser.setUserName("user1");
-//
-//        boolean isCreated = userService.save(systemUser);
-//
-//        Assert.assertTrue(isCreated);
-//
-//        Mockito.verify(userService, Mockito.times(1)).save(systemUser);
-//        Mockito.verify(mailService, Mockito.times(1))
-//                .sendMail(ArgumentMatchers.eq(systemUser.getEmail()), ArgumentMatchers.eq("2"), ArgumentMatchers.anyString());
-//    }
+    @Test
+    public void userServiceTest() {
+        SystemUser systemUser = new SystemUser();
+        systemUser.setUserName("user1");
+
+        boolean isCreated = userService.save(systemUser);
+
+        Assert.assertTrue(isCreated);
+
+        Mockito.verify(userService, Mockito.times(1)).save(systemUser);
+        Mockito.verify(mailService, Mockito.times(1))
+                .sendMail(ArgumentMatchers.eq(systemUser.getEmail()), ArgumentMatchers.eq("2"), ArgumentMatchers.anyString());
+    }
 
     @Test
     public void addUserFailTest() {
