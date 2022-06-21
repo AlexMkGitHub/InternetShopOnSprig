@@ -35,9 +35,25 @@ public class FileStoreService implements IFileStoreService {
         return filename;
     }
 
+//    @Override
+//    public byte[] getFile(UUID md5) throws IOException {
+//        String filename = fileMetaProvider.checkFileExists(md5);
+//        String ext = FilenameUtils.getExtension(filename);
+//        String fullFileName = md5.toString() + "." + ext;
+//        return  systemProvider.getFile(fullFileName);
+//    }
+
+//    @Override
+//    public byte[] getFile(UUID md5, String fileName) throws IOException {
+//        String filename = fileMetaProvider.checkFileExists(md5);
+//        String ext = FilenameUtils.getExtension(filename);
+//        String fullFileName = md5.toString() + "." + ext;
+//        return  systemProvider.getFile(fullFileName);
+//    }
+
     @Override
-    public byte[] getFile(UUID md5) throws IOException {
-        String filename = fileMetaProvider.checkFileExists(md5);
+    public byte[] getFile(UUID md5, String fileName) throws IOException {
+        String filename = fileMetaProvider.checkFileExistsWithFilename(md5, fileName);
         String ext = FilenameUtils.getExtension(filename);
         String fullFileName = md5.toString() + "." + ext;
         return  systemProvider.getFile(fullFileName);

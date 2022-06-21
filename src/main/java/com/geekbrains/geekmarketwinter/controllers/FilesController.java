@@ -34,8 +34,8 @@ public class FilesController {
     }
 
     @GetMapping("/getfile")
-    public ResponseEntity<Resource> downloadFile(@RequestParam("hash") UUID hash) throws IOException {
-       byte[] array = fileStoreService.getFile(hash);
+    public ResponseEntity<Resource> downloadFile(@RequestParam("hash") UUID hash, @RequestParam("fileName") String fileName) throws IOException {
+       byte[] array = fileStoreService.getFile(hash, fileName);
        return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(new ByteArrayResource(array));

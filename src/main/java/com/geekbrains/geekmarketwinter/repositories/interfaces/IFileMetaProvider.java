@@ -8,6 +8,7 @@ import java.util.UUID;
 public interface IFileMetaProvider {
 
     String checkFileExists(UUID fileHash);
+    String checkFileExistsWithFilename(UUID fileHash, String filename);
 
     /**
      * Сохранить метаданные файла
