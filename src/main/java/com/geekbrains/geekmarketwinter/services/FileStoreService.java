@@ -56,13 +56,23 @@ public class FileStoreService implements IFileStoreService {
         String filename = fileMetaProvider.checkFileExistsWithFilename(md5, fileName);
         String ext = FilenameUtils.getExtension(filename);
         String fullFileName = md5.toString() + "." + ext;
-        return  systemProvider.getFile(fullFileName);
+        return systemProvider.getFile(fullFileName);
     }
 
     @Override
     public Collection<FileMetaDTO> getMetaFiles(int subtype) {
-       return fileMetaProvider.getMetaFiles(subtype);
+        return fileMetaProvider.getMetaFiles(subtype);
     }
 
-
+    @Override
+    public void deleteFile(String fileName) throws IOException {
+        Collection<FileMetaDTO> fileCount = fileMetaProvider.getCountSameHash(fileName);
+        if (fileCount.size() > 1) {
+            fileMetaProvider.deleteFile(fileName);
+        } else {
+            String fileHash = fileMetaProvider.getHashByFilename(fileName);
+            systemProvider.deleteFile(fileHash);
+            fileMetaProvider.deleteFile(fileName);
+        }
+    }
 }

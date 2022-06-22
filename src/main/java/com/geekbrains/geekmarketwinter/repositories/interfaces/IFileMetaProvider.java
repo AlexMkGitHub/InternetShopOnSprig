@@ -17,4 +17,11 @@ public interface IFileMetaProvider {
     void saveFileMeta(UUID Hash, String fileName, int sybType);
 
     Collection<FileMetaDTO> getMetaFiles(int subtype);
+
+    void deleteFile(String fileName);
+
+    Collection<FileMetaDTO> getCountSameHash(String filename);
+
+    String getHashByFilename (String filename);
+
 }
