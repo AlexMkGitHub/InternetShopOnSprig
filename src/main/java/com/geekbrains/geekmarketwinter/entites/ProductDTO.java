@@ -1,25 +1,24 @@
 package com.geekbrains.geekmarketwinter.entites;
 
+import java.util.UUID;
+
 public class ProductDTO {
+    private UUID hash;
+    private Double fileSize;
 
-    private int id;
-
-    private String title;
-
-
-    public int getId() {
-        return id;
+    public UUID getHash() {
+        return hash;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setHash(UUID hash) {
+        this.hash = hash;
     }
 
-    public String getTitle() {
-        return title;
+    public Double getFileSize() {
+        return fileSize;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setFileSize(Double fileSize) {
+        this.fileSize = fileSize;
     }
 }
